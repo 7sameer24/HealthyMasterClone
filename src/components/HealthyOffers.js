@@ -41,7 +41,6 @@ const HealthyOffers = () => {
               <Image source={{uri: item.ImageSource}} style={styles.image} />
               <Text style={styles.Text}>{item.heading}</Text>
               <Text style={styles.Text}>{item.Quantity}</Text>
-              <Text style={styles.Text}>{item.Quantity}</Text>
             </Card>
           )}
         />
