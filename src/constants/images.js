@@ -7,7 +7,7 @@ const Banner =
   'https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80';
 const Banner2 =
   'https://images.unsplash.com/photo-1594897030264-ab7d87efc473?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmFja2dvcnVuZHxlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60';
-
+const Drawer = require('../../assets/images/layer_4.jpg');
 export default {
   avatar_5,
   Slide1,
@@ -16,4 +16,5 @@ export default {
   Slide4,
   Banner,
   Banner2,
+  Drawer,
 };

@@ -1,16 +1,9 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useEffect} from 'react';
+import {LogBox, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {colors} from 'react-native-elements';
-import AnyIcon from '../components/AnyIcon';
 import Banner from '../components/Banner';
 import Categories from '../components/Categories';
+import HeaderBar from '../components/HeaderBar';
 import HealthyOffers from '../components/HealthyOffers';
 import SlideShow from '../components/SlideShow';
 import Suscribe from '../components/Suscribe';
@@ -19,57 +12,15 @@ import {COLORS, images} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
 
 const HomeScreen = ({navigation}) => {
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.View}>
-        <View style={styles.View2}>
-          <AnyIcon
-            name="menu-outline"
-            type="ionicon"
-            size={30}
-            color={COLORS.white}
-            containerStyle={styles.IconStyle}
-            onPress={() => navigation.toggleDrawer()}
-          />
-          <Text style={styles.Heading}>Healthy Master</Text>
-          <View style={styles.IconContainer}>
-            <AnyIcon
-              name="cart-outline"
-              type="ionicon"
-              size={30}
-              color={COLORS.white}
-              containerStyle={genericStyles.mr(10)}
-            />
-            <AnyIcon
-              name="heart-outline"
-              type="ionicon"
-              size={30}
-              color={COLORS.white}
-              containerStyle={genericStyles.mr(10)}
-            />
-            <AnyIcon
-              name="bell-outline"
-              type="material-community"
-              size={30}
-              color={COLORS.white}
-            />
-          </View>
-        </View>
-        <TouchableOpacity
-          style={styles.SearchCon}
-          onPress={() => navigation.navigate('Search')}>
-          <AnyIcon
-            name="search-outline"
-            size={23}
-            color={COLORS.darkgray}
-            type="ionicon"
-            containerStyle={styles.SearchIcon}
-          />
-          <Text style={styles.SearchHead}>
-            Search from wide range of products
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <HeaderBar
+        onPress={() => navigation.toggleDrawer()}
+        onPress2={() => navigation.navigate('Search')}
+      />
       <ScrollView style={genericStyles.fill} nestedScrollEnabled={true}>
         <View style={styles.colorView}></View>
         <SlideShow />

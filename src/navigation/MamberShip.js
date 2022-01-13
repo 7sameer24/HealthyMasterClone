@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const Gift = () => {
+const MamberShip = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Gift</Text>
+      <Text>Mamber Ship</Text>
     </View>
   );
 };
 
-export default Gift;
+export default MamberShip;
 
 const styles = StyleSheet.create({});
