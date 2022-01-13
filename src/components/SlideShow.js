@@ -7,7 +7,7 @@ import {genericStyles} from '../constants/genericStyles';
 const SlideShow = () => {
   const allImage = [images.Slide1, images.Slide2, images.Slide3, images.Slide4];
   return (
-    <View style={genericStyles.bottom(50)}>
+    <View style={genericStyles.bottom(45)}>
       <SliderBox
         images={allImage}
         sliderBoxHeight={150}

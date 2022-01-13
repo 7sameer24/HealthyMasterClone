@@ -1,22 +1,26 @@
 import React from 'react';
 import {
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {colors} from 'react-native-elements';
 import AnyIcon from '../components/AnyIcon';
 import Banner from '../components/Banner';
 import Categories from '../components/Categories';
 import HealthyOffers from '../components/HealthyOffers';
 import SlideShow from '../components/SlideShow';
-import {COLORS} from '../constants';
+import Suscribe from '../components/Suscribe';
+import Testimonials from '../components/Testimonials';
+import {COLORS, images} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
 
 const HomeScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.View}>
         <View style={styles.View2}>
           <AnyIcon
@@ -70,10 +74,21 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.colorView}></View>
         <SlideShow />
         <Categories />
-        <Banner />
+        <Banner
+          source={{
+            uri: images.Banner,
+          }}
+        />
         <HealthyOffers />
+        <Banner
+          source={{
+            uri: images.Banner2,
+          }}
+        />
+        <Testimonials />
+        <Suscribe />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -82,16 +97,17 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.lightGray2,
   },
   View: {
     flex: 0.1,
-    backgroundColor: COLORS.lawngreen,
-    paddingBottom: 45,
+    backgroundColor: colors.success,
+    paddingBottom: 50,
   },
   View2: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: 20,
   },
   Heading: {
     color: COLORS.white,
@@ -113,7 +129,7 @@ const styles = StyleSheet.create({
     width: '95%',
     flexDirection: 'row',
     height: 46,
-    marginTop: 10,
+    marginTop: 5,
     alignSelf: 'center',
   },
   SearchHead: {
@@ -126,7 +142,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   colorView: {
-    backgroundColor: COLORS.lawngreen,
+    backgroundColor: colors.success,
     height: 50,
   },
 });

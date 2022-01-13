@@ -16,18 +16,18 @@ const HealthyOffers = () => {
   return (
     <ImageBackground
       source={{
-        uri: 'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        uri: 'https://images.unsplash.com/photo-1469178066045-855bb6994cc0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       }}
-      style={genericStyles.fill}
-      resizeMethod={'auto'}
-      fadeDuration={0}>
+      fadeDuration={0}
+      imageStyle={genericStyles.height(120)}
+      style={{bottom: 30, marginBottom: 20}}>
       <Text style={styles.Heading}>Healthy Offerings</Text>
-      <Divider width={1} style={genericStyles.mh(170)} />
+      <Divider width={1} style={styles.Divider} />
       <View>
         <FlatList
           data={CateData}
           keyExtractor={item => item.id}
-          scrollEnabled={false}
+          // scrollEnabled={false}
           showsHorizontalScrollIndicator={false}
           numColumns={3}
           columnWrapperStyle={styles.columnWrapperStyle}
@@ -56,31 +56,36 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: 'center',
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 10,
     color: COLORS.white,
   },
   containerStyle: {
     width: 104,
-    height: 98,
+    height: 95,
     borderRadius: 5,
     borderWidth: 0,
     padding: 0,
-    borderTopLeftRadius: 60,
+    borderTopLeftRadius: 55,
+    elevation: 10,
+  },
+  Divider: {
+    marginHorizontal: 170,
+    marginBottom: 10,
   },
   Text: {
     fontWeight: '500',
     color: COLORS.black,
-    bottom: 25,
+    bottom: 29,
   },
   image: {
     alignSelf: 'center',
-    width: 85,
+    width: 95,
     height: 85,
     bottom: 25,
     borderRadius: 7,
   },
   columnWrapperStyle: {
     justifyContent: 'space-around',
-    marginTop: 40,
+    marginTop: 20,
   },
 });

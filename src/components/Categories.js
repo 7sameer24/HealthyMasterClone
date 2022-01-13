@@ -12,7 +12,7 @@ const Categories = ({Style}) => {
         data={cardArr}
         keyExtractor={item => item.id}
         horizontal
-        scrollEnabled={false}
+        // scrollEnabled={false}
         showsHorizontalScrollIndicator={false}
         style={genericStyles.bottom(50)}
         renderItem={({item}) => (
