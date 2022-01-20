@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const NewArrivals = () => {
+const OurPolicies = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>NA</Text>
+      <Text>Our Policies</Text>
     </View>
   );
 };
 
-export default NewArrivals;
+export default OurPolicies;
 
 const styles = StyleSheet.create({});

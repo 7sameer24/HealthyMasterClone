@@ -1,42 +1,55 @@
-import React from 'react';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Card, Divider} from 'react-native-elements';
-import TestimonialData from '../../assets/Data/TestimonialData';
+import getData from '../API/API';
 import {COLORS} from '../constants';
-import {genericStyles} from '../constants/genericStyles';
 import AnyIcon from './AnyIcon';
 
 const Testimonials = () => {
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    const response = await getData();
+    const {status} = response;
+    if (!status) {
+      console.log(response);
+      return void 0;
+    } else {
+      setData(response.data.clients);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.Heading}>Our Clients say</Text>
       <Divider width={1} style={styles.Divider} color={COLORS.lawngreen} />
-      <View>
-        <FlatList
-          data={TestimonialData}
-          keyExtractor={item => item.id}
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          renderItem={({item}) => (
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {data.map(data => (
+          <View key={data.id}>
             <Card
               containerStyle={[
                 styles.containerStyle,
-                {backgroundColor: item.BG},
+                {backgroundColor: data.color},
               ]}
-              wrapperStyle={genericStyles.ai('center')}>
+              wrapperStyle={{padding: 0, height: 200}}>
               <AnyIcon
                 name="format-quote-open"
                 type="material-community"
                 color={COLORS.opacity}
-                size={50}
+                size={40}
               />
-              <Text style={styles.Text}>{item.content}</Text>
-              <Image source={item.image} style={styles.image} />
-              <Text style={[styles.Text, {marginTop: 3}]}>{item.name}</Text>
+              <Text style={styles.description} adjustsFontSizeToFit={true}>
+                {data.description}
+              </Text>
+              <View style={{marginTop: 20}}>
+                <Image source={{uri: data.image}} style={styles.image} />
+                <Text style={styles.Name}>{data.name}</Text>
+              </View>
             </Card>
-          )}
-        />
-      </View>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -46,7 +59,7 @@ export default Testimonials;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.white,
-    bottom: 30,
+    bottom: 10,
     paddingVertical: 10,
   },
   Heading: {
@@ -68,19 +81,26 @@ const styles = StyleSheet.create({
   Divider: {
     marginHorizontal: 190,
   },
-  Text: {
+  description: {
     fontWeight: '500',
     color: COLORS.white,
-    margin: 10,
-    fontSize: 16,
+    fontSize: 15,
+    textAlign: 'left',
+    marginHorizontal: 10,
     marginBottom: 0,
   },
   image: {
-    alignSelf: 'center',
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: COLORS.white,
-    marginTop: 50,
+    borderColor: COLORS.white,
+    borderWidth: 2,
+    alignSelf: 'center',
+  },
+  Name: {
+    fontWeight: '500',
+    color: COLORS.white,
+    fontSize: 14,
+    textAlign: 'center',
   },
 });

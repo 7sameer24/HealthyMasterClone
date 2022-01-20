@@ -8,8 +8,8 @@ const Suscribe = () => {
   return (
     <Card containerStyle={styles.containerStyle}>
       <Text style={styles.heading}>Suscribe to our Newsletter</Text>
-      <Divider width={2} style={genericStyles.mh(130)} color="white" />
-      <Text style={[styles.heading, {fontSize: 18}]}>
+      <Divider width={1} style={genericStyles.mh(130)} color="white" />
+      <Text style={[styles.heading, {fontSize: 15}]}>
         Get helpful tips to help you get stay healthy
       </Text>
       <Input
@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.success,
     margin: 0,
     marginHorizontal: 10,
-    bottom: 10,
+    marginBottom: 5,
   },
   heading: {
-    fontSize: 25,
+    fontSize: 21,
     textAlign: 'center',
     marginVertical: 10,
     color: COLORS.white,

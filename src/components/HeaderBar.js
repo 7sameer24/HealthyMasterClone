@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,12 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 import {colors} from 'react-native-elements';
 import AnyIcon from './AnyIcon';
 import {COLORS} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
+import {getHomeData} from '../store/action/action';
 
 const HeaderBar = ({onPress, onPress2}) => {
+  // const data = useSelector(state => state);
+  // const {dynamic} = data;
+  // const dispatch = useDispatch();
+
   return (
     <View style={styles.View}>
       <View style={styles.View2}>

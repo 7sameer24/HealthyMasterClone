@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {LogBox, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {colors} from 'react-native-elements';
 import Banner from '../components/Banner';
 import Categories from '../components/Categories';
@@ -12,9 +12,6 @@ import {COLORS, images} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
 
 const HomeScreen = ({navigation}) => {
-  useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar
@@ -35,6 +32,7 @@ const HomeScreen = ({navigation}) => {
           source={{
             uri: images.Banner2,
           }}
+          style={genericStyles.bottom(20)}
         />
         <Testimonials />
         <Suscribe />

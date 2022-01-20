@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import {images} from '../constants';
@@ -6,6 +6,7 @@ import {genericStyles} from '../constants/genericStyles';
 
 const SlideShow = () => {
   const allImage = [images.Slide1, images.Slide2, images.Slide3, images.Slide4];
+
   return (
     <View style={genericStyles.bottom(45)}>
       <SliderBox

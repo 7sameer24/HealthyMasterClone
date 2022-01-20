@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const NewArrivals = () => {
+const Complimentary = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>NA</Text>
+      <Text>Complimentary</Text>
     </View>
   );
 };
 
-export default NewArrivals;
+export default Complimentary;
 
 const styles = StyleSheet.create({});
