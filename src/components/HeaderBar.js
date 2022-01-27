@@ -1,23 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {colors} from 'react-native-elements';
 import AnyIcon from './AnyIcon';
 import {COLORS} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
-import {getHomeData} from '../store/action/action';
 
-const HeaderBar = ({onPress, onPress2}) => {
-  // const data = useSelector(state => state);
-  // const {dynamic} = data;
-  // const dispatch = useDispatch();
-
+const HeaderBar = ({navigation}) => {
   return (
     <View style={styles.View}>
       <View style={styles.View2}>
@@ -27,7 +16,7 @@ const HeaderBar = ({onPress, onPress2}) => {
           size={30}
           color={COLORS.white}
           containerStyle={styles.IconStyle}
-          onPress={onPress}
+          onPress={() => navigation.toggleDrawer()}
         />
         <Text style={styles.Heading}>Healthy Master</Text>
         <View style={styles.IconContainer}>
@@ -53,7 +42,9 @@ const HeaderBar = ({onPress, onPress2}) => {
           />
         </View>
       </View>
-      <TouchableOpacity style={styles.SearchCon} onPress={onPress2}>
+      <TouchableOpacity
+        style={styles.SearchCon}
+        onPress={() => navigation.navigate('Search')}>
         <AnyIcon
           name="search-outline"
           size={23}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../navigation/HomeScreen';
 import SearchScreen from '../navigation/SearchScreen';
 import GiftsASmile from '../navigation/GiftsASmile';
@@ -12,12 +12,17 @@ import B2B from '../navigation/B2B';
 import Blogs from '../navigation/Blogs';
 import OurPolicies from '../navigation/OurPolicies';
 import ContactUs from '../navigation/ContactUs';
+import {COLORS} from '../constants';
+import {colors} from 'react-native-elements';
+import ProductDetails from '../components/Items/ProductDetails';
+import Items from '../components/Items/Items';
+import HeaderInput from '../components/HeaderInput';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{animation: 'slide_from_right'}}>
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -25,7 +30,31 @@ function MyStack() {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          headerStyle: {backgroundColor: colors.success},
+          headerTitle: () => <HeaderInput />,
+        }}
+      />
+      <Stack.Screen
+        name="Items"
+        component={Items}
+        options={({route}) => ({
+          title: route.params.Name,
+          headerStyle: {backgroundColor: colors.success},
+          headerTintColor: COLORS.white,
+        })}
+      />
+      <Stack.Screen
+        name="Product Details"
+        component={ProductDetails}
+        options={({route}) => ({
+          headerStyle: {backgroundColor: colors.success},
+          headerTintColor: COLORS.white,
+        })}
+      />
     </Stack.Navigator>
   );
 }

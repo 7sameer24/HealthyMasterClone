@@ -2,13 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Card, Divider} from 'react-native-elements';
 import getData from '../API/API';
+import Home from '../API/apiUrl';
 import {COLORS} from '../constants';
+import {genericStyles} from '../constants/genericStyles';
 import AnyIcon from './AnyIcon';
 
 const Testimonials = () => {
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    const response = await getData();
+    const URL = Home;
+    const response = await getData(URL);
     const {status} = response;
     if (!status) {
       console.log(response);
@@ -31,18 +34,20 @@ const Testimonials = () => {
               containerStyle={[
                 styles.containerStyle,
                 {backgroundColor: data.color},
-              ]}
-              wrapperStyle={{padding: 0, height: 200}}>
+              ]}>
               <AnyIcon
                 name="format-quote-open"
                 type="material-community"
                 color={COLORS.opacity}
                 size={40}
               />
-              <Text style={styles.description} adjustsFontSizeToFit={true}>
+              <Text
+                style={styles.description}
+                numberOfLines={7}
+                textBreakStrategy="highQuality">
                 {data.description}
               </Text>
-              <View style={{marginTop: 20}}>
+              <View style={genericStyles.mt(60)}>
                 <Image source={{uri: data.image}} style={styles.image} />
                 <Text style={styles.Name}>{data.name}</Text>
               </View>
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   Name: {
-    fontWeight: '500',
+    fontWeight: '700',
     color: COLORS.white,
     fontSize: 14,
     textAlign: 'center',

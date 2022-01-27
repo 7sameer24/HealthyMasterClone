@@ -1,14 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Card, colors, Divider} from 'react-native-elements';
-import {COLORS} from '../constants';
+import {COLORS, images} from '../constants';
 import getData from '../API/API';
 import {genericStyles} from '../constants/genericStyles';
+import Home from '../API/apiUrl';
 
-const HealthyOffers = () => {
+const HealthyOffers = ({onPress, navigation}) => {
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    const response = await getData();
+    const URL = Home;
+    const response = await getData(URL);
     const {status} = response;
     if (!status) {
       console.log(response);
@@ -19,31 +29,50 @@ const HealthyOffers = () => {
       );
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
   return (
     <View style={genericStyles.bottom(30)}>
-      <ImageBackground
-        source={{
-          uri: 'https://images.unsplash.com/photo-1469178066045-855bb6994cc0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        }}
-        fadeDuration={0}
-        imageStyle={genericStyles.height(120)}>
-        <Text style={styles.Heading}>Healthy Offerings</Text>
-        <Divider width={1} style={styles.Divider} color={COLORS.white} />
-        <View style={styles.View}>
-          {data.map(data => (
-            <Card containerStyle={[styles.containerStyle]} key={data.id}>
-              <Image source={{uri: data.image_fullpath}} style={styles.image} />
-              <Text style={styles.Text}>{data.name}</Text>
-              <Text style={[styles.item_count]}>
-                {data.item_count} Products
-              </Text>
-            </Card>
-          ))}
-        </View>
-      </ImageBackground>
+      {data.length > 0 ? (
+        <ImageBackground
+          source={{
+            uri: images.Banner3,
+          }}
+          fadeDuration={0}
+          imageStyle={[genericStyles.height(120), {marginTop: 2}]}>
+          <Text style={styles.Heading}>Healthy Offerings</Text>
+          <Divider width={1} style={styles.Divider} color={colors.white} />
+          <View style={styles.View}>
+            {data.map(data => (
+              <TouchableOpacity
+                key={data.id}
+                activeOpacity={0.9}
+                onPress={() =>
+                  navigation.navigate('Items', {
+                    Name: data.name,
+                    ID: data.id,
+                    Count: data.item_count,
+                  })
+                }>
+                <Card containerStyle={[styles.containerStyle]}>
+                  <Image
+                    source={{uri: data.image_fullpath}}
+                    style={styles.image}
+                  />
+                  <Text style={styles.Text}>{data.name}</Text>
+                  <Text style={[styles.item_count]}>
+                    {data.item_count} Products
+                  </Text>
+                </Card>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ImageBackground>
+      ) : (
+        <ActivityIndicator color={colors.success} size={'large'} />
+      )}
     </View>
   );
 };
@@ -52,11 +81,16 @@ export default HealthyOffers;
 
 const styles = StyleSheet.create({
   Heading: {
-    fontSize: 20,
-    marginBottom: 10,
+    fontSize: 15,
+    marginBottom: 5,
     marginTop: 10,
     color: COLORS.white,
     textAlign: 'center',
+    fontWeight: '500',
+    backgroundColor: colors.success,
+    borderRadius: 7,
+    marginHorizontal: 120,
+    paddingVertical: 5,
   },
   containerStyle: {
     width: 114,

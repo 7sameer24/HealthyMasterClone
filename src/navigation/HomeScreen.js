@@ -12,22 +12,25 @@ import {COLORS, images} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
 
 const HomeScreen = ({navigation}) => {
+  const allImage = [images.Slide1, images.Slide2, images.Slide3, images.Slide4];
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBar
-        onPress={() => navigation.toggleDrawer()}
-        onPress2={() => navigation.navigate('Search')}
-      />
-      <ScrollView style={genericStyles.fill} nestedScrollEnabled={true}>
+      <HeaderBar navigation={navigation} />
+      <ScrollView style={genericStyles.fill}>
         <View style={styles.colorView}></View>
-        <SlideShow />
+        <SlideShow
+          Images={allImage}
+          sliderBoxHeight={150}
+          autoplay={true}
+          circleLoop={true}
+        />
         <Categories />
         <Banner
           source={{
             uri: images.Banner,
           }}
         />
-        <HealthyOffers />
+        <HealthyOffers navigation={navigation} />
         <Banner
           source={{
             uri: images.Banner2,
@@ -47,48 +50,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.lightGray2,
-  },
-  View: {
-    flex: 0.1,
-    backgroundColor: colors.success,
-    paddingBottom: 50,
-  },
-  View2: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 20,
-  },
-  Heading: {
-    color: COLORS.white,
-    fontSize: 18,
-    marginTop: 20,
-    right: 50,
-  },
-  IconContainer: {
-    flexDirection: 'row',
-    marginTop: 15,
-  },
-  IconStyle: {
-    right: 12,
-    marginTop: 15,
-  },
-  SearchCon: {
-    backgroundColor: COLORS.white,
-    borderRadius: 7,
-    width: '95%',
-    flexDirection: 'row',
-    height: 46,
-    marginTop: 5,
-    alignSelf: 'center',
-  },
-  SearchHead: {
-    padding: 10,
-    fontSize: 15,
-    color: COLORS.black,
-  },
-  SearchIcon: {
-    marginTop: 10,
-    marginLeft: 15,
   },
   colorView: {
     backgroundColor: colors.success,
