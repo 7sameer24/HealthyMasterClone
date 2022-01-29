@@ -14,8 +14,8 @@ import OurPolicies from '../navigation/OurPolicies';
 import ContactUs from '../navigation/ContactUs';
 import {COLORS} from '../constants';
 import {colors} from 'react-native-elements';
-import ProductDetails from '../components/Items/ProductDetails';
-import Items from '../components/Items/Items';
+import ProductDetails from '../components/ItemScreen/ProductScreen/ProductDetails';
+import Items from '../components/ItemScreen/Items/Items';
 import HeaderInput from '../components/HeaderInput';
 
 const Stack = createNativeStackNavigator();

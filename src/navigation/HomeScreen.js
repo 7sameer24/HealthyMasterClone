@@ -25,18 +25,9 @@ const HomeScreen = ({navigation}) => {
           circleLoop={true}
         />
         <Categories />
-        <Banner
-          source={{
-            uri: images.Banner,
-          }}
-        />
+        <Banner source={images.Banner} />
         <HealthyOffers navigation={navigation} />
-        <Banner
-          source={{
-            uri: images.Banner2,
-          }}
-          style={genericStyles.bottom(20)}
-        />
+        <Banner source={images.Banner2} style={genericStyles.bottom(20)} />
         <Testimonials />
         <Suscribe />
       </ScrollView>

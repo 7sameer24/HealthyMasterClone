@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Card, Divider} from 'react-native-elements';
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {Card, colors, Divider} from 'react-native-elements';
 import getData from '../API/API';
 import Home from '../API/apiUrl';
 import {COLORS} from '../constants';
@@ -25,36 +32,42 @@ const Testimonials = () => {
   }, []);
   return (
     <View style={styles.container}>
-      <Text style={styles.Heading}>Our Clients say</Text>
-      <Divider width={1} style={styles.Divider} color={COLORS.lawngreen} />
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {data.map(data => (
-          <View key={data.id}>
-            <Card
-              containerStyle={[
-                styles.containerStyle,
-                {backgroundColor: data.color},
-              ]}>
-              <AnyIcon
-                name="format-quote-open"
-                type="material-community"
-                color={COLORS.opacity}
-                size={40}
-              />
-              <Text
-                style={styles.description}
-                numberOfLines={7}
-                textBreakStrategy="highQuality">
-                {data.description}
-              </Text>
-              <View style={genericStyles.mt(60)}>
-                <Image source={{uri: data.image}} style={styles.image} />
-                <Text style={styles.Name}>{data.name}</Text>
+      {data.length > 0 ? (
+        <>
+          <Text style={styles.Heading}>Our Clients say</Text>
+          <Divider width={1} style={styles.Divider} color={COLORS.lawngreen} />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {data.map(data => (
+              <View key={data.id}>
+                <Card
+                  containerStyle={[
+                    styles.containerStyle,
+                    {backgroundColor: data.color},
+                  ]}>
+                  <AnyIcon
+                    name="format-quote-open"
+                    type="material-community"
+                    color={COLORS.opacity}
+                    size={40}
+                  />
+                  <Text
+                    style={styles.description}
+                    numberOfLines={7}
+                    textBreakStrategy="highQuality">
+                    {data.description}
+                  </Text>
+                  <View style={genericStyles.mt(60)}>
+                    <Image source={{uri: data.image}} style={styles.image} />
+                    <Text style={styles.Name}>{data.name}</Text>
+                  </View>
+                </Card>
               </View>
-            </Card>
-          </View>
-        ))}
-      </ScrollView>
+            ))}
+          </ScrollView>
+        </>
+      ) : (
+        <ActivityIndicator size="large" color={colors.success} />
+      )}
     </View>
   );
 };

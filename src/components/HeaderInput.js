@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {colors, Input} from 'react-native-elements';
 import {genericStyles} from '../constants/genericStyles';
 import {COLORS} from '../constants';
@@ -7,9 +7,10 @@ import AnyIcon from './AnyIcon';
 
 const HeaderInput = () => {
   const [value, setValue] = useState('');
-  //   useEffect(() => {
-  //     <Input />;
-  //   }, []);
+  const inputFocus = useRef(null);
+  useEffect(() => {
+    inputFocus.current.focus();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -19,9 +20,9 @@ const HeaderInput = () => {
         inputStyle={genericStyles.m(0)}
         placeholderTextColor={COLORS.white}
         errorStyle={styles.errorStyle}
-        autoFocus={true}
         value={value}
         onChangeText={text => setValue(text)}
+        ref={inputFocus}
       />
       <AnyIcon
         name="mic"

@@ -26,6 +26,8 @@ const ItemList = ({
   container,
   numColumns,
   initialNumToRender,
+  numberOfLines,
+  columnWrapperStyle,
 }) => {
   return (
     <View style={itemListContainer}>
@@ -39,6 +41,7 @@ const ItemList = ({
         horizontal={horizontal}
         contentContainerStyle={contentContainerStyle}
         showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
+        columnWrapperStyle={columnWrapperStyle}
         renderItem={({item}) => {
           //   console.log(item.name);
           return (
@@ -59,6 +62,7 @@ const ItemList = ({
                   <View>
                     <Text style={TextStyle}>{item.name}</Text>
                     <Text
+                      numberOfLines={numberOfLines}
                       style={shortDescriptionStyle}
                       textBreakStrategy="highQuality">
                       {item.short_description}

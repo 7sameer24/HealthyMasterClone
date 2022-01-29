@@ -37,9 +37,7 @@ const HealthyOffers = ({onPress, navigation}) => {
     <View style={genericStyles.bottom(30)}>
       {data.length > 0 ? (
         <ImageBackground
-          source={{
-            uri: images.Banner3,
-          }}
+          source={images.Banner3}
           fadeDuration={0}
           imageStyle={[genericStyles.height(120), {marginTop: 2}]}>
           <Text style={styles.Heading}>Healthy Offerings</Text>
@@ -98,7 +96,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 0.9,
     padding: 0,
-    // borderTopLeftRadius: 70,
     elevation: 2,
     margin: 20,
     marginTop: 35,
@@ -126,7 +123,7 @@ const styles = StyleSheet.create({
   View: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   item_count: {
     fontWeight: '500',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 
 const Banner = ({source, style}) => {
   return <Image source={source} style={[styles.image, {...style}]} />;

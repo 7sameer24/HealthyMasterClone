@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
   },
   Rate: {
     color: COLORS.red,
-    marginLeft: 5,
     fontSize: 13,
     fontWeight: '600',
+    textAlign: 'center',
   },
   PickerContainer: {
     width: 140,
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     width: 120,
     padding: 6,
     borderRadius: 4,
-    left: 90,
     marginTop: 5,
   },
   CartFont: {

@@ -2,7 +2,6 @@ import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawer from '../components/CustomDrawer';
 import {COLORS} from '../constants';
-import AnyIcon from '../components/AnyIcon';
 import {StyleSheet} from 'react-native';
 import obj from './NavigationObj';
 
@@ -20,14 +19,11 @@ function MyDrawer() {
         drawerLabelStyle: styles.drawerLabelStyle,
         drawerItemStyle: styles.drawerItemStyle,
       }}>
-      {obj.map((_, key) => (
+      {obj.map(_ => (
         <Drawer.Screen
           key={_.id}
           options={{
             headerShown: _.headerShown,
-            // drawerIcon: () => (
-            //   <AnyIcon name={_.iconName} type={_.type} color={COLORS.white} />
-            // ),
           }}
           name={_.name}
           component={_.component}
@@ -42,7 +38,6 @@ export default MyDrawer;
 const styles = StyleSheet.create({
   drawerLabelStyle: {
     fontSize: 14,
-    // marginLeft: -23,
   },
   drawerItemStyle: {
     marginBottom: 0,
