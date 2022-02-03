@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Text, View} from 'react-native';
-import getData from '../../../API/API';
-import AnyIcon from '../../AnyIcon';
+import getData from '../../../constants/API/API';
+import AnyIcon from '../../MainComponents/AnyIcon';
 import {genericStyles} from '../../../constants/genericStyles';
 import {colors} from 'react-native-elements';
-import ItemList from '../ItemList';
+import ItemList from './ItemList';
 import styles from './ItemsStyles';
 const Items = ({route, navigation}) => {
   const {ID, Count} = route.params;
@@ -12,7 +12,7 @@ const Items = ({route, navigation}) => {
   const [Grid, setGrid] = useState(false);
 
   const itemList = async () => {
-    const URL = `https://healthymaster.in/admins/api/items/item.json?&item_category_id=${ID}&customer_id=159&page=1`;
+    const URL = `http://3.6.175.107//admins/api/items/item.json?&item_category_id=${ID}&customer_id=159&page=1`;
     const response = await getData(URL);
     const {status} = response;
     if (!status) {

@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View, useWindowDimensions} from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import {colors} from 'react-native-elements';
-import {COLORS} from '../../constants';
-import AnyIcon from '../AnyIcon';
+import {COLORS} from '../../../constants';
+import AnyIcon from '../../MainComponents/AnyIcon';
 import RenderHtml from 'react-native-render-html';
 
 const Collapsible = ({Data}) => {

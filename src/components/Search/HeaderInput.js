@@ -1,12 +1,11 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {colors, Input} from 'react-native-elements';
-import {genericStyles} from '../constants/genericStyles';
-import {COLORS} from '../constants';
-import AnyIcon from './AnyIcon';
+import {genericStyles} from '../../constants/genericStyles';
+import {COLORS} from '../../constants';
+import AnyIcon from '../MainComponents/AnyIcon';
 
-const HeaderInput = () => {
-  const [value, setValue] = useState('');
+const HeaderInput = ({value, onChangeText, New}) => {
   const inputFocus = useRef(null);
   useEffect(() => {
     inputFocus.current.focus();
@@ -17,11 +16,11 @@ const HeaderInput = () => {
       <Input
         placeholder="Search"
         inputContainerStyle={styles.InputContainerStyle}
-        inputStyle={genericStyles.m(0)}
+        inputStyle={[genericStyles.m(0), {color: colors.white}]}
         placeholderTextColor={COLORS.white}
         errorStyle={styles.errorStyle}
         value={value}
-        onChangeText={text => setValue(text)}
+        onChangeText={onChangeText}
         ref={inputFocus}
       />
       <AnyIcon
@@ -30,6 +29,7 @@ const HeaderInput = () => {
         color={colors.white}
         size={25}
         containerStyle={styles.containerStyle}
+        onPress={() => alert('Not available')}
       />
     </View>
   );
@@ -45,15 +45,15 @@ const styles = StyleSheet.create({
   InputContainerStyle: {
     borderBottomWidth: 0,
     width: 300,
-    top: 5,
+    // top: 5,
     right: 30,
   },
   errorStyle: {
     margin: 0,
-    left: 5,
+    fontSize: 0,
   },
   containerStyle: {
     right: 75,
-    top: 15,
+    top: 12,
   },
 });

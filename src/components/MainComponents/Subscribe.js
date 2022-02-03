@@ -1,13 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {Card, Divider, Input, Button, colors} from 'react-native-elements';
-import {COLORS} from '../constants';
-import {genericStyles} from '../constants/genericStyles';
+import {COLORS} from '../../constants';
+import {genericStyles} from '../../constants/genericStyles';
 
-const Suscribe = () => {
+const Subscribe = () => {
   return (
     <Card containerStyle={styles.containerStyle}>
-      <Text style={styles.heading}>Suscribe to our Newsletter</Text>
+      <Text style={styles.heading}>Subscribe to our Newsletter</Text>
       <Divider width={1} style={genericStyles.mh(130)} color="white" />
       <Text style={[styles.heading, {fontSize: 15}]}>
         Get helpful tips to help you get stay healthy
@@ -20,7 +20,7 @@ const Suscribe = () => {
         errorStyle={genericStyles.m(0)}
       />
       <Button
-        title="Suscribe"
+        title="Subscribe"
         containerStyle={styles.buttonCon}
         buttonStyle={genericStyles.bg(COLORS.black)}
       />
@@ -28,7 +28,7 @@ const Suscribe = () => {
   );
 };
 
-export default Suscribe;
+export default Subscribe;
 
 const styles = StyleSheet.create({
   containerStyle: {

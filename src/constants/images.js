@@ -13,6 +13,8 @@ const Banner3 = {
   uri: 'https://healthymaster.in/admins/img/banner/61cc099bb9c46.jpg',
 };
 const Drawer = require('../../assets/images/layer_4.jpg');
+const LoginBg = require('../../assets/images/screen_bg.png');
+const AppLogo = require('../../assets/images/app_logo.png');
 export default {
   avatar_5,
   Slide1,
@@ -23,4 +25,6 @@ export default {
   Banner2,
   Drawer,
   Banner3,
+  LoginBg,
+  AppLogo,
 };

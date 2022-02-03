@@ -1,6 +1,6 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import CustomDrawer from '../components/CustomDrawer';
+import CustomDrawer from '../components/MainComponents/CustomDrawer';
 import {COLORS} from '../constants';
 import {StyleSheet} from 'react-native';
 import obj from './NavigationObj';

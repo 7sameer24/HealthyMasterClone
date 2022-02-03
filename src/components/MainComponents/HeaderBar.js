@@ -1,12 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {colors} from 'react-native-elements';
+import {Badge, colors} from 'react-native-elements';
 import AnyIcon from './AnyIcon';
-import {COLORS} from '../constants';
-import {genericStyles} from '../constants/genericStyles';
+import {COLORS} from '../../constants';
+import {genericStyles} from '../../constants/genericStyles';
 
-const HeaderBar = ({navigation}) => {
+const HeaderBar = ({navigation, Data}) => {
   return (
     <View style={styles.View}>
       <View style={styles.View2}>
@@ -26,6 +25,12 @@ const HeaderBar = ({navigation}) => {
             size={30}
             color={COLORS.white}
             containerStyle={genericStyles.mr(10)}
+            onPress={() => alert('Not available')}
+          />
+          <Badge
+            status="error"
+            value={Data}
+            containerStyle={styles.BadgeContainer}
           />
           <AnyIcon
             name="heart-outline"
@@ -33,12 +38,14 @@ const HeaderBar = ({navigation}) => {
             size={30}
             color={COLORS.white}
             containerStyle={genericStyles.mr(10)}
+            onPress={() => alert('Not available')}
           />
           <AnyIcon
             name="bell-outline"
             type="material-community"
             size={30}
             color={COLORS.white}
+            onPress={() => alert('Not available')}
           />
         </View>
       </View>
@@ -66,7 +73,7 @@ const styles = StyleSheet.create({
   View: {
     flex: 0.1,
     backgroundColor: colors.success,
-    paddingBottom: 55,
+    paddingBottom: 60,
   },
   View2: {
     flexDirection: 'row',
@@ -104,5 +111,10 @@ const styles = StyleSheet.create({
   SearchIcon: {
     marginTop: 10,
     marginLeft: 15,
+  },
+  BadgeContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
   },
 });

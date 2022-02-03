@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import {COLORS} from '../../constants';
+import {COLORS} from '../../../constants';
 import {colors} from 'react-native-elements';
 
 const ItemCuantity = ({
@@ -51,7 +51,8 @@ const ItemCuantity = ({
       <View style={[styles.Fotter, {...Fotter}]}>
         <Text style={[styles.Rate, {...Rate}]}>Price {Price}₹</Text>
         <TouchableOpacity
-          style={[styles.AddCartContainer, {...AddCartContainer}]}>
+          style={[styles.AddCartContainer, {...AddCartContainer}]}
+          onPress={() => alert('Not available')}>
           <Text style={[styles.CartFont, {...CartFont}]}>Add to Cart</Text>
         </TouchableOpacity>
       </View>

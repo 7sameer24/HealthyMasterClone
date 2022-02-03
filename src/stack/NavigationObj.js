@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../navigation/HomeScreen';
 import SearchScreen from '../navigation/SearchScreen';
@@ -16,11 +16,48 @@ import {COLORS} from '../constants';
 import {colors} from 'react-native-elements';
 import ProductDetails from '../components/ItemScreen/ProductScreen/ProductDetails';
 import Items from '../components/ItemScreen/Items/Items';
-import HeaderInput from '../components/HeaderInput';
+import HeaderInput from '../components/Search/HeaderInput';
+import LoginScreen from '../components/Login/LoginScreen';
+import getData from '../constants/API/API';
+import apiUrl from '../constants/API/apiUrl';
+import SearchResult from '../components/Search/SearchResult';
 
 const Stack = createNativeStackNavigator();
 
-function MyStack() {
+function MyStack({navigation}) {
+  const [filterData, setFilterData] = useState([]);
+  const [masterData, setMasterData] = useState([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    fetchName();
+  }, []);
+
+  const fetchName = async () => {
+    const URL = apiUrl.SearchItem;
+    const response = await getData(URL);
+    const {status} = response;
+    if (!status) {
+      console.log(response);
+      return void 0;
+    } else {
+      setFilterData(response.data.search_items);
+      setMasterData(response.data.search_items);
+    }
+  };
+  const setFilter = text => {
+    if (text) {
+      const newData = masterData.filter(item => {
+        const itemData = item.name ? item.name.toLowerCase() : ''.toUpperCase();
+        const textData = text.toLowerCase();
+        return itemData.search(textData) > -1;
+      });
+      setFilterData(newData);
+      setSearch(text);
+    } else {
+      setSearch(text);
+    }
+  };
   return (
     <Stack.Navigator screenOptions={{animation: 'slide_from_right'}}>
       <Stack.Screen
@@ -32,11 +69,33 @@ function MyStack() {
       />
       <Stack.Screen
         name="Search"
-        component={SearchScreen}
-        options={{
+        options={({route}) => ({
           headerStyle: {backgroundColor: colors.success},
-          headerTitle: () => <HeaderInput />,
-        }}
+          headerTintColor: colors.white,
+          headerTitle: () => (
+            <HeaderInput
+              value={search}
+              onChangeText={text => setFilter(text)}
+            />
+          ),
+        })}>
+        {() => (
+          <SearchScreen
+            Data={filterData}
+            value={search}
+            navigation={navigation}
+            NAN={text => setSearch(text)}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen
+        name="Result"
+        component={SearchResult}
+        options={({route}) => ({
+          title: route.params.Name,
+          headerStyle: {backgroundColor: colors.success},
+          headerTintColor: COLORS.white,
+        })}
       />
       <Stack.Screen
         name="Items"
@@ -53,6 +112,15 @@ function MyStack() {
         options={({route}) => ({
           headerStyle: {backgroundColor: colors.success},
           headerTintColor: COLORS.white,
+        })}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={({route}) => ({
+          headerStyle: {backgroundColor: colors.success},
+          headerTintColor: COLORS.white,
+          animation: 'slide_from_right',
         })}
       />
     </Stack.Navigator>

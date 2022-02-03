@@ -1,9 +1,9 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, Image} from 'react-native';
 import {Card} from 'react-native-elements';
-import cardArr from '../../assets/Data/DummyData';
-import {COLORS} from '../constants';
-import {genericStyles} from '../constants/genericStyles';
+import cardArr from '../../../assets/Data/DummyData';
+import {COLORS} from '../../constants';
+import {genericStyles} from '../../constants/genericStyles';
 
 const Categories = ({Style}) => {
   return (

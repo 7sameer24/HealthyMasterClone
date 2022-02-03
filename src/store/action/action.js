@@ -1,7 +1,7 @@
 export const GET_HOME = 'GET_HOME';
 
 const API_URL =
-  'http://3.6.175.107/hmfinal/admins/api/item_categories/home.json?admin_id=1&customer_id=159';
+  'http://3.6.175.107//admins/api/items/item.json?&item_category_id=38&customer_id=159&page=1';
 
 export const getHomeData = () => {
   try {

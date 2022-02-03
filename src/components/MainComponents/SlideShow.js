@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
-import {genericStyles} from '../constants/genericStyles';
+import {genericStyles} from '../../constants/genericStyles';
 
 const SlideShow = ({
   Images,

@@ -69,16 +69,17 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
   },
   TextStyle: {
-    alignSelf: 'center',
     marginTop: 5,
     fontWeight: '500',
     color: COLORS.black,
     fontSize: 14,
+    textAlign: 'center',
   },
   short_description: {
     color: COLORS.darkgray,
     textAlign: 'center',
     fontSize: 13,
+    marginHorizontal: 10,
   },
   container: {
     marginLeft: 0,
@@ -101,7 +102,6 @@ export default styles = StyleSheet.create({
   ViewContainer: {
     flex: 1,
     backgroundColor: COLORS.transparent,
-    marginBottom: 15,
   },
   RelatedProductsCon: {
     marginLeft: 7,
@@ -109,6 +109,11 @@ export default styles = StyleSheet.create({
   },
   titleStyle: {
     fontWeight: '400',
-    fontSize: 13,
+    fontSize: 14,
+  },
+  loader: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
 });

@@ -43,7 +43,7 @@ const ItemList = ({
         showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
         columnWrapperStyle={columnWrapperStyle}
         renderItem={({item}) => {
-          //   console.log(item.name);
+          // console.log(item.item_variations);
           return (
             <Card containerStyle={containerStyle}>
               <TouchableOpacity
@@ -52,6 +52,7 @@ const ItemList = ({
                   navigation.push('Product Details', {
                     Data: item,
                     Data2: data,
+                    ID: item.item_variations[0].item_id,
                   })
                 }>
                 <View style={viewStyle}>
@@ -64,7 +65,7 @@ const ItemList = ({
                     <Text
                       numberOfLines={numberOfLines}
                       style={shortDescriptionStyle}
-                      textBreakStrategy="highQuality">
+                      textBreakStrategy="balanced">
                       {item.short_description}
                     </Text>
                   </View>

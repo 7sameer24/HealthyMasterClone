@@ -40,9 +40,10 @@ export default styles = StyleSheet.create({
   Text: Grid => ({
     fontWeight: '500',
     color: COLORS.black,
-    fontSize: 14,
+    fontSize: 13,
     alignSelf: Grid ? 'center' : null,
     marginTop: Grid ? 5 : null,
+    textAlign: Grid ? 'center' : null,
   }),
   itemListContainer: {
     flex: 1,
@@ -51,8 +52,9 @@ export default styles = StyleSheet.create({
   short_description: Grid => ({
     color: COLORS.darkgray,
     textAlign: Grid ? 'center' : 'left',
-    marginRight: Grid ? null : 100,
+    marginRight: Grid ? null : 130,
     fontSize: 13,
+    marginHorizontal: Grid ? 10 : null,
   }),
   loader: {
     alignItems: 'center',

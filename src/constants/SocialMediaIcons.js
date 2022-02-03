@@ -1,6 +1,6 @@
 const SocialMedia = [
   {
-    IconName: 'https://cdn-icons-png.flaticon.com/512/174/174848.png',
+    IconName: 'https://cdn-icons-png.flaticon.com/512/733/733547.png',
     id: 1,
   },
   {

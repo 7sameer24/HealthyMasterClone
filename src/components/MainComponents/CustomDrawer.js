@@ -4,9 +4,10 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {COLORS, images} from '../constants';
-import {genericStyles} from '../constants/genericStyles';
-import SocialMedia from '../constants/SocialMediaIcons';
+import {COLORS, images} from '../../constants';
+import {genericStyles} from '../../constants/genericStyles';
+import SocialMedia from '../../constants/SocialMediaIcons';
+import {Button, colors} from 'react-native-elements';
 
 const CustomDrawer = props => {
   return (
@@ -14,11 +15,21 @@ const CustomDrawer = props => {
       <ImageBackground
         source={images.Drawer}
         style={genericStyles.fill}
-        blurRadius={3}>
+        blurRadius={0}
+        fadeDuration={0}>
         <DrawerContentScrollView {...props}>
           <View style={styles.View}>
             <Image source={images.avatar_5} style={styles.Image} />
-            <Text style={styles.head}>Welcome</Text>
+            <View style={genericStyles.FD('column')}>
+              <Text style={styles.head}>Welcome</Text>
+              <Button
+                title="Login"
+                type="clear"
+                containerStyle={styles.btnContainer}
+                titleStyle={styles.titleStyle}
+                onPress={() => props.navigation.navigate('Login')}
+              />
+            </View>
           </View>
           <DrawerItemList {...props} />
         </DrawerContentScrollView>
@@ -75,5 +86,14 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     marginVertical: 5,
+  },
+  btnContainer: {
+    width: 70,
+    alignSelf: 'center',
+    marginLeft: 30,
+  },
+  titleStyle: {
+    color: colors.success,
+    fontSize: 18,
   },
 });
