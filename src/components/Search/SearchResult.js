@@ -14,15 +14,15 @@ import {genericStyles} from '../../constants/genericStyles';
 import ItemCuantity from '../ItemScreen/Items/ItemCuantity';
 
 const SearchResult = ({route, navigation}) => {
-  const {ID} = route.params;
+  const {ID, CategoryID} = route.params;
   const [Data, setData] = useState([]);
   const [masterData, setMasterData] = useState([]);
-  // console.log(ID);
-  //   console.log(Data[0].name);
 
   const FetchProduct = async () => {
     const URL = 'http://3.6.175.107/admins/api/items/search_result.json?';
+    const URL2 = `http://3.6.175.107//admins/api/items/item.json?&item_category_id=${CategoryID}&customer_id=159&page=1`;
     const response = await getData(URL);
+    const SecondUrlRes = await getData(URL2);
     const {status} = response;
     if (!status) {
       console.log(response);
@@ -33,7 +33,7 @@ const SearchResult = ({route, navigation}) => {
           return item.id === ID;
         }),
       );
-      setMasterData(response.data.searchResult);
+      setMasterData(SecondUrlRes.data.items);
     }
   };
 
@@ -42,45 +42,48 @@ const SearchResult = ({route, navigation}) => {
   }, []);
 
   return (
-    <View style={styles.Rapeing}>
+    <View style={genericStyles.fill}>
       {Data.length > 0 ? (
         <>
+          <Text style={styles.Rapeing}>Search Result</Text>
           {Data.map(data => {
             return (
-              <Card containerStyle={styles.containerStyle} key={data.id}>
-                <TouchableOpacity
-                  activeOpacity={0.9}
-                  onPress={() =>
-                    navigation.push('Product Details', {
-                      Data: data,
-                      Data2: masterData,
-                      ID: data.item_variations[0].item_id,
-                    })
-                  }>
-                  <View style={genericStyles.row}>
-                    <Image
-                      source={{uri: data.image_fullpath}}
-                      style={styles.styleImage}
-                    />
-                    <View>
-                      <Text style={styles.TextStyle}>{data.name}</Text>
-                      <Text
-                        numberOfLines={4}
-                        style={styles.shortDescriptionStyle}
-                        textBreakStrategy="balanced">
-                        {data.short_description}
-                      </Text>
+              <View key={data.id} style={genericStyles.mh(10)}>
+                <Card containerStyle={styles.containerStyle}>
+                  <TouchableOpacity
+                    activeOpacity={0.9}
+                    onPress={() =>
+                      navigation.push('Product Details', {
+                        Data: data,
+                        Data2: masterData,
+                        ID: data.item_variations[0].item_id,
+                      })
+                    }>
+                    <View style={genericStyles.row}>
+                      <Image
+                        source={{uri: data.image_fullpath}}
+                        style={styles.styleImage}
+                      />
+                      <View>
+                        <Text style={styles.TextStyle}>{data.name}</Text>
+                        <Text
+                          numberOfLines={4}
+                          style={styles.shortDescriptionStyle}
+                          textBreakStrategy="balanced">
+                          {data.short_description}
+                        </Text>
+                      </View>
                     </View>
-                  </View>
-                </TouchableOpacity>
-                <ItemCuantity
-                  data={data.item_variations}
-                  Name={data.name}
-                  AddCartContainer={styles.AddCartContainer}
-                  Fotter={styles.Fotter}
-                  PickerContainer={genericStyles.selfCenter}
-                />
-              </Card>
+                  </TouchableOpacity>
+                  <ItemCuantity
+                    data={data.item_variations}
+                    Name={data.name}
+                    AddCartContainer={styles.AddCartContainer}
+                    Fotter={styles.Fotter}
+                    PickerContainer={genericStyles.selfCenter}
+                  />
+                </Card>
+              </View>
             );
           })}
         </>
@@ -98,7 +101,11 @@ const SearchResult = ({route, navigation}) => {
 export default SearchResult;
 
 const styles = StyleSheet.create({
-  Rapeing: {flex: 1, marginHorizontal: 10},
+  Rapeing: {
+    backgroundColor: COLORS.darkgray,
+    paddingVertical: 2,
+    color: colors.white,
+  },
   loader: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -137,13 +144,8 @@ const styles = StyleSheet.create({
     left: 40,
     bottom: 10,
   },
-  CartFont: {},
-  container: {},
-  DropDownFont: {},
   Fotter: {
     flexDirection: 'row',
     marginLeft: 70,
   },
-  PickerContainer: {},
-  Rate: {},
 });

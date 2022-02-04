@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import {colors} from 'react-native-elements';
@@ -22,10 +21,10 @@ import {COLORS, images} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
 
 const HomeScreen = ({navigation}) => {
-  const allImage = [images.Slide1, images.Slide2, images.Slide3, images.Slide4];
   const [data, setData] = useState([]);
   const [TestData, setTestData] = useState([]);
   const [cart, setCart] = useState([]);
+  const [allImage, setImage] = useState([]);
   const fetchData = async () => {
     const URL = apiUrl.Home;
     const response = await getData(URL);
@@ -39,8 +38,11 @@ const HomeScreen = ({navigation}) => {
       );
       setTestData(response.data.clients);
       setCart(response.data.cart_count);
+      setImage(response.data.dynamic[0].DynamicList);
     }
   };
+
+  const FetchImages = allImage.map(_ => _.image_fullpath);
 
   useEffect(() => {
     fetchData();
@@ -48,13 +50,13 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {(data && TestData).length > 0 ? (
+      {(data && TestData && allImage).length > 0 ? (
         <>
           <HeaderBar navigation={navigation} Data={cart} />
           <ScrollView style={genericStyles.fill}>
             <View style={styles.colorView}></View>
             <SlideShow
-              Images={allImage}
+              Images={FetchImages}
               sliderBoxHeight={150}
               autoplay={true}
               circleLoop={true}
