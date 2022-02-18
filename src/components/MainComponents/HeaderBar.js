@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Badge } from 'react-native-elements';
+import {StyleSheet, Text, ToastAndroid, View} from 'react-native';
+import {Badge} from 'react-native-elements';
 import AnyIcon from './AnyIcon';
-import { COLORS } from '../../constants';
-import { genericStyles } from '../../constants/genericStyles';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import {COLORS} from '../../constants';
+import {genericStyles} from '../../constants/genericStyles';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 
 const HeaderBar = ({
   navigation,
@@ -23,17 +23,17 @@ const HeaderBar = ({
   // const ItemCount = useSelector(state => state);
   // console.log('yayy', Object.keys(ItemCount));
   return (
-    <SafeAreaView style={[styles.Container, { ...Container }]}>
+    <SafeAreaView style={[styles.Container, {...Container}]}>
       <View style={styles.View2}>
         <AnyIcon
           name={IconName}
           type="ionicon"
           size={IconSize}
           color={COLORS.white}
-          containerStyle={[styles.IconStyle, { ...IconStyle }]}
+          containerStyle={[styles.IconStyle, {...IconStyle}]}
           onPress={onPress}
         />
-        <Text style={[styles.Heading, { ...Heading }]}>{headerName}</Text>
+        <Text style={[styles.Heading, {...Heading}]}>{headerName}</Text>
         <View style={styles.IconContainer}>
           <AnyIcon
             name="cart-outline"
@@ -46,7 +46,7 @@ const HeaderBar = ({
           <Badge
             status="error"
             // value={ItemCount.addCart}
-            containerStyle={[styles.BadgeContainer, { ...BadgeContainer }]}
+            containerStyle={[styles.BadgeContainer, {...BadgeContainer}]}
           />
           <AnyIcon
             name={HeartIcon}
@@ -54,14 +54,18 @@ const HeaderBar = ({
             size={IconSize}
             color={COLORS.white}
             containerStyle={genericStyles.mr(10)}
-            onPress={() => alert('Not available')}
+            onPress={() =>
+              ToastAndroid.show('Not available', ToastAndroid.SHORT)
+            }
           />
           <AnyIcon
             name={BellIcon}
             type="material-community"
             size={30}
             color={COLORS.white}
-            onPress={() => alert('Not available')}
+            onPress={() =>
+              ToastAndroid.show('Not available', ToastAndroid.SHORT)
+            }
           />
         </View>
       </View>

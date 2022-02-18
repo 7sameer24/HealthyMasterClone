@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, ToastAndroid, View} from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import {Icon, Input} from 'react-native-elements';
 import {genericStyles} from '../../constants/genericStyles';
@@ -37,7 +37,7 @@ const HeaderInput = ({value, onChangeText, onPress}) => {
         color={COLORS.white}
         size={25}
         containerStyle={styles.containerStyle}
-        onPress={() => alert('Not available')}
+        onPress={() => ToastAndroid.show('Not available', ToastAndroid.SHORT)}
       />
     </SafeAreaView>
   );

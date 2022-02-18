@@ -59,7 +59,7 @@ const CustomDrawer = props => {
         fadeDuration={0}>
         <DrawerContentScrollView {...props}>
           <TouchableOpacity
-            activeOpacity={user === null ? 2 : 0.5}
+            activeOpacity={user === null ? 2 : 0.8}
             onPress={() =>
               user === null
                 ? null
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   head: {
     fontSize: 19,
     color: COLORS.white,
-    marginTop: 10,
+    // marginTop: 10,
     width: 150,
     textAlign: 'center',
   },
@@ -132,6 +132,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 5,
+    borderColor: COLORS.success,
+    borderBottomWidth: 2,
+    borderRadius: 5,
+    paddingBottom: 5,
   },
   OurP: {
     color: COLORS.black,

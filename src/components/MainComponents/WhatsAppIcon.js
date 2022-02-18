@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ToastAndroid} from 'react-native';
 import {COLORS} from '../../constants';
 import AnyIcon from './AnyIcon';
 
@@ -12,7 +12,7 @@ const WhatsAppIcon = () => {
       size={30}
       containerStyle={styles.containerStyle}
       reverse={true}
-      onPress={() => alert('Not available')}
+      onPress={() => ToastAndroid.show('Not available', ToastAndroid.SHORT)}
     />
   );
 };
