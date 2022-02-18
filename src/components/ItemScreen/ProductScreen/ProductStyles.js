@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {colors} from 'react-native-elements';
 import {COLORS} from '../../../constants';
 
 export default styles = StyleSheet.create({
@@ -37,7 +36,7 @@ export default styles = StyleSheet.create({
     borderWidth: 1,
     marginRight: 10,
     borderRadius: 4,
-    borderColor: selectedGM ? colors.success : COLORS.darkgray,
+    borderColor: selectedGM ? COLORS.success : COLORS.darkgray,
   }),
   sales_rate: {
     marginLeft: 3,
@@ -87,7 +86,7 @@ export default styles = StyleSheet.create({
     bottom: 20,
   },
   buttonStyle: {
-    backgroundColor: colors.success,
+    backgroundColor: COLORS.success,
     borderColor: 'transparent',
     borderWidth: 0,
     borderRadius: 30,
@@ -110,10 +109,5 @@ export default styles = StyleSheet.create({
   titleStyle: {
     fontWeight: '400',
     fontSize: 14,
-  },
-  loader: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
   },
 });

@@ -21,6 +21,7 @@ export const COLORS = {
   opacity: '#f2f2f2',
   newColor: '#F4F5F7',
   lawngreen: '#00FF00',
+  success: '#47b913',
 };
 
 export const SIZES = {

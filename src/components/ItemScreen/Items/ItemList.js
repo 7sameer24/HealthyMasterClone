@@ -28,6 +28,7 @@ const ItemList = ({
   initialNumToRender,
   numberOfLines,
   columnWrapperStyle,
+  onPressAddCart,
 }) => {
   return (
     <View style={itemListContainer}>
@@ -81,6 +82,7 @@ const ItemList = ({
                 Fotter={Fotter}
                 PickerContainer={PickerContainer}
                 Rate={Rate}
+                onPress={onPressAddCart}
               />
             </Card>
           );

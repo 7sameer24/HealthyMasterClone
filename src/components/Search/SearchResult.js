@@ -1,20 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {Card, colors} from 'react-native-elements';
+import React, { useEffect, useState } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Card } from 'react-native-elements';
 import getData from '../../constants/API/API';
-import {COLORS} from '../../constants';
-import {genericStyles} from '../../constants/genericStyles';
+import { COLORS } from '../../constants';
+import { genericStyles } from '../../constants/genericStyles';
 import ItemCuantity from '../ItemScreen/Items/ItemCuantity';
+import Spinner from '../MainComponents/Spinner';
 
-const SearchResult = ({route, navigation}) => {
-  const {ID, CategoryID} = route.params;
+const SearchResult = ({ route, navigation }) => {
+  const { ID, CategoryID } = route.params;
   const [Data, setData] = useState([]);
   const [masterData, setMasterData] = useState([]);
 
@@ -23,7 +17,7 @@ const SearchResult = ({route, navigation}) => {
     const URL2 = `http://3.6.175.107//admins/api/items/item.json?&item_category_id=${CategoryID}&customer_id=159&page=1`;
     const response = await getData(URL);
     const SecondUrlRes = await getData(URL2);
-    const {status} = response;
+    const { status } = response;
     if (!status) {
       console.log(response);
       return void 0;
@@ -39,6 +33,10 @@ const SearchResult = ({route, navigation}) => {
 
   useEffect(() => {
     FetchProduct();
+    return () => {
+      setData([]);
+      setMasterData([]);
+    };
   }, []);
 
   return (
@@ -61,7 +59,7 @@ const SearchResult = ({route, navigation}) => {
                     }>
                     <View style={genericStyles.row}>
                       <Image
-                        source={{uri: data.image_fullpath}}
+                        source={{ uri: data.image_fullpath }}
                         style={styles.styleImage}
                       />
                       <View>
@@ -88,11 +86,7 @@ const SearchResult = ({route, navigation}) => {
           })}
         </>
       ) : (
-        <ActivityIndicator
-          size="large"
-          color={colors.success}
-          style={styles.loader}
-        />
+        <Spinner />
       )}
     </View>
   );
@@ -104,12 +98,7 @@ const styles = StyleSheet.create({
   Rapeing: {
     backgroundColor: COLORS.darkgray,
     paddingVertical: 2,
-    color: colors.white,
-  },
-  loader: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
+    color: COLORS.white,
   },
   containerStyle: {
     borderRadius: 5,

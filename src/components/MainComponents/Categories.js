@@ -1,18 +1,21 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, useWindowDimensions} from 'react-native';
 import {Card} from 'react-native-elements';
 import cardArr from '../../../assets/Data/DummyData';
 import {COLORS} from '../../constants';
-import {genericStyles} from '../../constants/genericStyles';
 
-const Categories = ({Style}) => {
+const Categories = () => {
+  const {width, height} = useWindowDimensions();
   return (
     <View style={styles.container}>
       {cardArr.map(data => (
         <Card
           key={data.id}
-          containerStyle={[styles.containerStyle, {backgroundColor: data.BG}]}>
-          <Image source={{uri: data.ImageSource}} style={styles.image} />
+          containerStyle={[
+            styles.containerStyle(width, height),
+            {backgroundColor: data.BG},
+          ]}>
+          <Image source={data.ImageSource} style={styles.image} />
           <Text style={styles.Text}>{data.heading}</Text>
           <Text style={styles.Text}>{data.subHeading}</Text>
         </Card>
@@ -30,15 +33,15 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
-  containerStyle: {
-    width: 90,
-    height: 82,
+  containerStyle: (width, height) => ({
+    width: width / 4.3,
+    height: height / 10,
     borderRadius: 7,
     borderWidth: 0,
     paddingTop: 5,
     marginHorizontal: 3,
     padding: 0,
-  },
+  }),
   Text: {
     fontWeight: '500',
     color: COLORS.black,

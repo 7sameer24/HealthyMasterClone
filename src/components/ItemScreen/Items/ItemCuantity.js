@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {COLORS} from '../../../constants';
-import {colors} from 'react-native-elements';
 
 const ItemCuantity = ({
   data,
@@ -14,6 +13,7 @@ const ItemCuantity = ({
   Rate,
   AddCartContainer,
   CartFont,
+  onPress,
 }) => {
   const [selectedGM, setSelectedGM] = useState(data[0].quantity_variation);
   const allSalesRate = data.map(_ => _.sales_rate);
@@ -52,7 +52,9 @@ const ItemCuantity = ({
         <Text style={[styles.Rate, {...Rate}]}>Price {Price}₹</Text>
         <TouchableOpacity
           style={[styles.AddCartContainer, {...AddCartContainer}]}
-          onPress={() => alert('Not available')}>
+          onPress={onPress}
+          activeOpacity={0.7}
+          delayPressIn={0}>
           <Text style={[styles.CartFont, {...CartFont}]}>Add to Cart</Text>
         </TouchableOpacity>
       </View>
@@ -80,14 +82,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   AddCartContainer: {
-    backgroundColor: colors.success,
+    backgroundColor: COLORS.success,
     width: 120,
     padding: 6,
     borderRadius: 4,
     marginTop: 5,
   },
   CartFont: {
-    color: colors.white,
+    color: COLORS.white,
     alignSelf: 'center',
   },
   Fotter: {

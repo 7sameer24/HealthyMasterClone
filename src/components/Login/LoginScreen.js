@@ -1,17 +1,63 @@
 import {
   ImageBackground,
+  Keyboard,
   StyleSheet,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {images} from '../../constants';
-import {Button, colors, Image, Input} from 'react-native-elements';
+import React, {useRef, useState} from 'react';
+import {COLORS, images} from '../../constants';
+import {Button, Image, Input} from 'react-native-elements';
 import {genericStyles} from '../../constants/genericStyles';
+import LoginWithSocial from './LoginWithSocial';
+import auth from '@react-native-firebase/auth';
 
-const LoginScreen = () => {
-  const [value, setvalue] = useState('');
+const LoginScreen = ({navigation}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const secondInput = useRef(null);
+
+  const handleOnSubmit = async () => {
+    if (!email || !password) {
+      ToastAndroid.show('Please fill all fields', ToastAndroid.SHORT);
+    } else {
+      try {
+        await auth()
+          .signInWithEmailAndPassword(email, password, setIsLoading(true))
+          .then(() => {
+            setTimeout(() => {
+              navigation.navigate('HomeScreen');
+              ToastAndroid.show('User added successfully', ToastAndroid.SHORT);
+            }, 500);
+          });
+      } catch (error) {
+        if (error.code === 'auth/wrong-password') {
+          ToastAndroid.show(
+            'The password is invalid or the user does not have a password.',
+            ToastAndroid.SHORT,
+          );
+        }
+        if (error.code === 'auth/invalid-email') {
+          ToastAndroid.show(
+            'The email address is badly formatted.',
+            ToastAndroid.SHORT,
+          );
+        }
+        if (error.code === 'auth/user-not-found') {
+          ToastAndroid.show(
+            'There is no user record corresponding to this identifier.',
+            ToastAndroid.SHORT,
+          );
+        }
+      }
+      Keyboard.dismiss();
+      setIsLoading(false);
+    }
+  };
   return (
     <ImageBackground
       source={images.LoginBg}
@@ -25,42 +71,49 @@ const LoginScreen = () => {
       />
       <View>
         <Input
-          placeholder="Mobile no."
-          keyboardType="number-pad"
+          onSubmitEditing={() => (email ? secondInput.current.focus() : null)}
           inputContainerStyle={styles.InputContainerStyle}
-          placeholderTextColor={colors.white}
-          inputStyle={styles.inputStyle}
+          onChangeText={text => setEmail(text)}
+          placeholderTextColor={COLORS.white}
           errorStyle={genericStyles.mt(0)}
-          value={value}
-          onChangeText={text => setvalue(text)}
+          inputStyle={styles.inputStyle}
+          returnKeyType="next"
+          placeholder="Email"
+          value={email}
+        />
+        <Input
+          inputContainerStyle={styles.InputContainerStyle}
+          onChangeText={text => setPassword(text)}
+          placeholderTextColor={COLORS.white}
+          errorStyle={genericStyles.mt(0)}
+          inputStyle={styles.inputStyle}
+          secureTextEntry={visible}
+          placeholder="Password"
+          ref={secondInput}
+          value={password}
+          rightIcon={{
+            name: visible ? 'eye-outline' : 'eye-off',
+            onPress: () => setVisible(!visible),
+            color: COLORS.white,
+            type: 'ionicon',
+            containerStyle: {marginRight: 10},
+          }}
         />
         <Button
           title="Proceed"
           containerStyle={styles.BtncontainerStyle}
           buttonStyle={styles.buttonStyle}
+          onPress={() => handleOnSubmit()}
+          loading={isLoading ? true : false}
         />
-        <TouchableOpacity style={genericStyles.selfCenter}>
-          <Text style={styles.textStyle}>Forgot Password?</Text>
+        <TouchableOpacity
+          style={genericStyles.selfCenter}
+          onPress={() => {
+            navigation.navigate('Register'), setEmail(''), setPassword('');
+          }}>
+          <Text style={styles.textStyle}>Register?</Text>
         </TouchableOpacity>
-        <View style={genericStyles.selfCenter}>
-          <Text style={[styles.textStyle, {marginTop: 30}]}>Login With</Text>
-          <View style={genericStyles.f}>
-            <Image
-              source={{
-                uri: 'https://cdn-icons-png.flaticon.com/512/300/300221.png',
-              }}
-              style={styles.socialStyle}
-              fadeDuration={0}
-            />
-            <Image
-              source={{
-                uri: 'https://cdn-icons-png.flaticon.com/512/733/733547.png',
-              }}
-              style={styles.socialStyle}
-              fadeDuration={0}
-            />
-          </View>
-        </View>
+        <LoginWithSocial />
       </View>
     </ImageBackground>
   );
@@ -83,33 +136,27 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   InputContainerStyle: {
-    borderBottomWidth: 1,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: colors.success,
+    borderColor: COLORS.success,
   },
   inputStyle: {
-    color: colors.white,
+    color: COLORS.white,
     paddingVertical: 14,
     marginLeft: 10,
   },
   BtncontainerStyle: {
-    marginHorizontal: 20,
-    borderRadius: 5,
+    alignSelf: 'center',
     marginBottom: 20,
+    borderRadius: 5,
+    width: '95%',
   },
   buttonStyle: {
-    backgroundColor: colors.success,
+    backgroundColor: COLORS.success,
     paddingVertical: 13,
   },
   textStyle: {
     fontSize: 17,
-    color: colors.white,
-  },
-  socialStyle: {
-    width: 35,
-    height: 35,
-    marginRight: 15,
-    marginTop: 10,
+    color: COLORS.white,
   },
 });

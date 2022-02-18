@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, useWindowDimensions} from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
-import {colors} from 'react-native-elements';
 import {COLORS} from '../../../constants';
 import AnyIcon from '../../MainComponents/AnyIcon';
 import RenderHtml from 'react-native-render-html';
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: '600',
     fontSize: 15,
-    color: colors.success,
+    color: COLORS.success,
   },
   defaultViewProps: {
     alignItems: 'center',

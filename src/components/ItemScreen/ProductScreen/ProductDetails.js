@@ -1,23 +1,20 @@
-import {
-  ActivityIndicator,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import SlideShow from '../../MainComponents/SlideShow';
-import {COLORS} from '../../../constants';
-import {genericStyles} from '../../../constants/genericStyles';
-import {Button, colors, Divider} from 'react-native-elements';
+import { COLORS } from '../../../constants';
+import { genericStyles } from '../../../constants/genericStyles';
+import { Button, Divider } from 'react-native-elements';
 import Collapsible from '../Items/Collapsible';
 import ItemList from '../Items/ItemList';
 import styles from './ProductStyles';
 import getData from '../../../constants/API/API';
+import { ADD_TO_CART, INCREMENT } from '../../../store/action/action';
+import HeaderBar from '../../MainComponents/HeaderBar';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../../MainComponents/Spinner';
 
-const ProductDetails = ({route, navigation}) => {
-  const {Data, Data2, ID} = route.params;
-  // console.log(ID);
+const ProductDetails = ({ route, navigation }) => {
+  const { Data, Data2, ID } = route.params;
   const [selectedGM, setSelectedGM] = useState(
     Data.item_variations[0].quantity_variation,
   );
@@ -58,8 +55,20 @@ const ProductDetails = ({route, navigation}) => {
     };
   }, []);
 
+  const dispatch = useDispatch();
   return (
     <View style={styles.ViewContainer}>
+      <HeaderBar
+        headerName="Product Details"
+        IconName="arrow-back-outline"
+        IconSize={30}
+        onPress={() => navigation.goBack()}
+        HeartIcon="heart-outline"
+        navigation={navigation}
+        BadgeContainer={genericStyles.bottom(25)}
+        Container={genericStyles.height('11%')}
+        Heading={genericStyles.right(40)}
+      />
       {allImage.length > 0 ? (
         <>
           <ScrollView
@@ -85,6 +94,7 @@ const ProductDetails = ({route, navigation}) => {
                 {Data.item_variations.map(data => {
                   return (
                     <TouchableOpacity
+                      delayPressIn={null}
                       key={data.id}
                       style={styles.quantityTouchable(
                         selectedGM === data.quantity_variation,
@@ -144,15 +154,16 @@ const ProductDetails = ({route, navigation}) => {
               titleStyle={styles.titleStyle}
               buttonStyle={styles.buttonStyle}
               containerStyle={styles.ButtonCon}
+              onPress={() =>
+                dispatch({
+                  type: INCREMENT,
+                })
+              }
             />
           </View>
         </>
       ) : (
-        <ActivityIndicator
-          size="large"
-          style={styles.loader}
-          color={colors.success}
-        />
+        <Spinner />
       )}
     </View>
   );

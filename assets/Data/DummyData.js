@@ -3,31 +3,31 @@ import {COLORS} from '../../src/constants';
 const cardArr = [
   {
     heading: 'No',
-    ImageSource: 'https://cdn-icons-png.flaticon.com/512/5110/5110849.png',
+    ImageSource: require('../images/no-preservatives.png'),
     subHeading: 'Preservatives',
     id: 1,
-    BG: COLORS.white,
+    BG: '#f2ffe3',
   },
   {
     heading: 'No',
-    ImageSource: 'https://cdn-icons-png.flaticon.com/512/2720/2720714.png',
+    ImageSource: require('../images/no-maida.png'),
     subHeading: 'Maida',
     id: 2,
-    BG: COLORS.white,
+    BG: '#ffeee3',
   },
   {
     heading: 'High',
-    ImageSource: 'https://cdn-icons-png.flaticon.com/512/2720/2720573.png',
+    ImageSource: require('../images/high-in-fiber.png'),
     subHeading: 'in Fibres',
     id: 3,
-    BG: COLORS.white,
+    BG: '#fdeded',
   },
   {
     heading: 'Milet',
-    ImageSource: 'https://cdn-icons-png.flaticon.com/512/2720/2720562.png',
+    ImageSource: require('../images/millet-based.png'),
     subHeading: 'Based',
     id: 4,
-    BG: COLORS.white,
+    BG: '#dff5fc',
   },
 ];
 export default cardArr;

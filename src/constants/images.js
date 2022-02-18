@@ -1,8 +1,5 @@
 const avatar_5 = require('../../assets/images/avatar-5.png');
-const Slide1 = 'https://dswexrz9xr8ac.cloudfront.net/banners/61ea696d6610d.jpg';
-const Slide2 = 'https://dswexrz9xr8ac.cloudfront.net/banners/61d96ba78c0e8.jpg';
-const Slide3 = 'https://dswexrz9xr8ac.cloudfront.net/banners/61cc08e86698b.jpg';
-const Slide4 = 'https://dswexrz9xr8ac.cloudfront.net/banners/61cc08d3685de.jpg';
+const Banner4 = {uri: 'http://3.6.175.107/admins/img/banner/61bc2c224f44b.jpg'};
 const Banner = {
   uri: 'https://dswexrz9xr8ac.cloudfront.net/home_screen/61dc153230b2d.jpg',
 };
@@ -17,10 +14,7 @@ const LoginBg = require('../../assets/images/screen_bg.png');
 const AppLogo = require('../../assets/images/app_logo.png');
 export default {
   avatar_5,
-  Slide1,
-  Slide2,
-  Slide3,
-  Slide4,
+  Banner4,
   Banner,
   Banner2,
   Drawer,

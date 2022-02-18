@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../constants';
 import AnyIcon from './AnyIcon';
-import {colors} from 'react-native-elements';
 
 const WhatsAppIcon = () => {
   return (
     <AnyIcon
       name="logo-whatsapp"
       type="ionicon"
-      color={colors.success}
+      color={COLORS.success}
       size={30}
       containerStyle={styles.containerStyle}
       reverse={true}

@@ -1,39 +1,57 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import {colors, Divider} from 'react-native-elements';
-import {COLORS} from '../constants';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Divider } from 'react-native-elements';
+import { COLORS } from '../constants';
+import apiUrl from '../constants/API/apiUrl';
+import HeaderInput from '../components/Search/HeaderInput';
+import getData from '../constants/API/API';
 
-const SearchScreen = ({Data, value, navigation, NAN}) => {
-  // const [ProductName, setName] = useState([]);
-  // console.log(ProductName);
-  // const storeData = async value => {
-  //   try {
-  //     await AsyncStorage.setItem('Product', value);
-  //     alert('data Saved');
-  //   } catch (e) {
-  //     alert('Not Saved');
-  //   }
-  // };
+const SearchScreen = ({ navigation }) => {
+  const [filterData, setFilterData] = useState([]);
+  const [masterData, setMasterData] = useState([]);
+  const [search, setSearch] = useState('');
 
-  // const getData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem('Product');
-  //     if (value !== null) {
-  //       setName(value);
-  //     }
-  //   } catch (e) {
-  //     alert('Not Show');
-  //   }
-  // };
+  useEffect(() => {
+    fetchName();
+    return () => {
+      setFilterData([]);
+      setMasterData([]);
+    };
+  }, []);
 
-  const ItemView = ({item}) => {
+  const fetchName = async () => {
+    const URL = apiUrl.SearchItem;
+    const response = await getData(URL);
+    const { status } = response;
+    if (!status) {
+      console.log(response);
+      return void 0;
+    } else {
+      setFilterData(response.data.search_items);
+      setMasterData(response.data.search_items);
+    }
+  };
+  const setFilter = text => {
+    if (text) {
+      const newData = masterData.filter(item => {
+        const itemData = item.name ? item.name.toLowerCase() : ''.toUpperCase();
+        const textData = text.toLowerCase();
+        return itemData.search(textData) > -1;
+      });
+      setFilterData(newData);
+      setSearch(text);
+    } else {
+      setSearch(text);
+    }
+  };
+
+  const ItemView = ({ item }) => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -42,9 +60,7 @@ const SearchScreen = ({Data, value, navigation, NAN}) => {
             ID: item.item_id,
             CategoryID: item.category_id,
           }),
-            NAN('');
-          //   storeData(item.name);
-          // getData();
+            setSearch('');
         }}>
         <Text style={styles.ItemView}>{item.name}</Text>
       </TouchableOpacity>
@@ -56,18 +72,24 @@ const SearchScreen = ({Data, value, navigation, NAN}) => {
   };
 
   return (
-    <SafeAreaView>
+    <View>
+      <HeaderInput
+        value={search}
+        onChangeText={text => setFilter(text)}
+        onPress={() => {
+          navigation.goBack(), setSearch('');
+        }}
+      />
       <Text style={styles.Rapeing}>
-        {value.length > 0 ? 'Search Suggestions' : 'Search History'}
+        {search.length > 0 ? 'Search Suggestions' : 'Search History'}
       </Text>
-      {/* {value.length > 0 ? null : <Text>{ProductName}</Text>} */}
       <FlatList
-        data={value.length > 0 ? Data : null}
+        data={search.length > 0 ? filterData : null}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={ItemSeparatorComponent}
         renderItem={ItemView}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -80,7 +102,7 @@ const styles = StyleSheet.create({
   InputContainerStyle: {
     width: '100%',
     top: 5,
-    borderColor: colors.success,
+    borderColor: COLORS.success,
     borderWidth: 1,
   },
   errorStyle: {
@@ -90,6 +112,6 @@ const styles = StyleSheet.create({
   Rapeing: {
     backgroundColor: COLORS.darkgray,
     paddingVertical: 2,
-    color: colors.white,
+    color: COLORS.white,
   },
 });

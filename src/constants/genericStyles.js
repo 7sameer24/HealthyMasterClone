@@ -237,4 +237,7 @@ export const genericStyles = StyleSheet.create({
   FD: flexDirection => ({
     flexDirection,
   }),
+  right: right => ({
+    right,
+  }),
 });

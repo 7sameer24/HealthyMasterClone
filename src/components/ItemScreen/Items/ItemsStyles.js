@@ -23,7 +23,7 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingTop: 5,
     paddingBottom: 0,
-    width: Grid ? 180 : '100%',
+    width: Grid ? '47%' : '100%',
     marginHorizontal: Grid ? 5 : 0,
     marginBottom: 3,
     marginTop: 10,
@@ -31,8 +31,8 @@ export default styles = StyleSheet.create({
     minHeight: Grid ? 260 : null,
   }),
   image: Grid => ({
-    width: Grid ? 170 : 95,
-    height: Grid ? 100 : 90,
+    width: Grid ? '95%' : '25%',
+    height: Grid ? 100 : 85,
     borderRadius: 5,
     marginRight: Grid ? null : 10,
     alignSelf: Grid ? 'center' : null,
@@ -56,11 +56,6 @@ export default styles = StyleSheet.create({
     fontSize: 13,
     marginHorizontal: Grid ? 10 : null,
   }),
-  loader: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
   Fotter: Grid => ({
     flexDirection: Grid ? 'column' : 'row',
     alignSelf: Grid ? 'center' : null,

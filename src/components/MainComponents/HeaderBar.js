@@ -1,47 +1,63 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Badge, colors} from 'react-native-elements';
+import { StyleSheet, Text, View } from 'react-native';
+import { Badge } from 'react-native-elements';
 import AnyIcon from './AnyIcon';
-import {COLORS} from '../../constants';
-import {genericStyles} from '../../constants/genericStyles';
+import { COLORS } from '../../constants';
+import { genericStyles } from '../../constants/genericStyles';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
-const HeaderBar = ({navigation, Data}) => {
+const HeaderBar = ({
+  navigation,
+  headerName,
+  IconName,
+  onPress,
+  IconSize,
+  BellIcon,
+  HeartIcon,
+  BadgeContainer,
+  Container,
+  Heading,
+  IconStyle,
+}) => {
+  // const ItemCount = useSelector(state => state);
+  // console.log('yayy', Object.keys(ItemCount));
   return (
-    <View style={styles.View}>
+    <SafeAreaView style={[styles.Container, { ...Container }]}>
       <View style={styles.View2}>
         <AnyIcon
-          name="menu-outline"
+          name={IconName}
           type="ionicon"
-          size={30}
+          size={IconSize}
           color={COLORS.white}
-          containerStyle={styles.IconStyle}
-          onPress={() => navigation.toggleDrawer()}
+          containerStyle={[styles.IconStyle, { ...IconStyle }]}
+          onPress={onPress}
         />
-        <Text style={styles.Heading}>Healthy Master</Text>
+        <Text style={[styles.Heading, { ...Heading }]}>{headerName}</Text>
         <View style={styles.IconContainer}>
           <AnyIcon
             name="cart-outline"
             type="ionicon"
-            size={30}
+            size={IconSize}
             color={COLORS.white}
             containerStyle={genericStyles.mr(10)}
-            onPress={() => alert('Not available')}
+            onPress={() => navigation.navigate('My Cart')}
           />
           <Badge
             status="error"
-            value={Data}
-            containerStyle={styles.BadgeContainer}
+            // value={ItemCount.addCart}
+            containerStyle={[styles.BadgeContainer, { ...BadgeContainer }]}
           />
           <AnyIcon
-            name="heart-outline"
+            name={HeartIcon}
             type="ionicon"
-            size={30}
+            size={IconSize}
             color={COLORS.white}
             containerStyle={genericStyles.mr(10)}
             onPress={() => alert('Not available')}
           />
           <AnyIcon
-            name="bell-outline"
+            name={BellIcon}
             type="material-community"
             size={30}
             color={COLORS.white}
@@ -49,68 +65,37 @@ const HeaderBar = ({navigation, Data}) => {
           />
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.SearchCon}
-        onPress={() => navigation.navigate('Search')}>
-        <AnyIcon
-          name="search-outline"
-          size={23}
-          color={COLORS.darkgray}
-          type="ionicon"
-          containerStyle={styles.SearchIcon}
-        />
-        <Text style={styles.SearchHead}>
-          Search from wide range of products
-        </Text>
-      </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default HeaderBar;
 
 const styles = StyleSheet.create({
-  View: {
-    flex: 0.1,
-    backgroundColor: colors.success,
-    paddingBottom: 60,
+  Container: {
+    height: '10%',
+    backgroundColor: COLORS.success,
   },
   View2: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    alignItems: 'center',
+    marginTop: 10,
   },
   Heading: {
     color: COLORS.white,
     fontSize: 18,
-    marginTop: 20,
-    right: 50,
+    fontWeight: '500',
+    right: 30,
+    alignItems: 'center',
   },
   IconContainer: {
     flexDirection: 'row',
-    marginTop: 15,
+    alignItems: 'center',
+    left: '3%',
   },
   IconStyle: {
     right: 12,
-    marginTop: 15,
-  },
-  SearchCon: {
-    backgroundColor: COLORS.white,
-    borderRadius: 5,
-    width: '93%',
-    flexDirection: 'row',
-    height: 46,
-    marginTop: 8,
-    alignSelf: 'center',
-  },
-  SearchHead: {
-    padding: 10,
-    fontSize: 15,
-    color: COLORS.black,
-  },
-  SearchIcon: {
-    marginTop: 10,
-    marginLeft: 15,
   },
   BadgeContainer: {
     position: 'absolute',

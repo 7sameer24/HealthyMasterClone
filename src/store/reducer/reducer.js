@@ -1,13 +1,21 @@
-import {GET_HOME} from '../action/action';
+import { ADD_TO_CART, DECREMENT, INCREMENT } from '../action/action';
 
 const initialState = {
-  Home: [],
+  cart: '',
+  addCart: 0,
 };
-
 export const mainReducer = (state = initialState, action) => {
+  const val = state.addCart;
+  // console.logs(state, action.payload);
+  // return { addCart: val + 1 };
+
   switch (action.type) {
-    case GET_HOME:
-      return {...state, Home: action.payload};
+    case ADD_TO_CART:
+      return { ...state, cart: action.payload };
+    case INCREMENT:
+      return { addCart: state.addCart + 1 };
+    case DECREMENT:
+      return { ...state, addCart: val - 1 };
     default:
       state;
   }

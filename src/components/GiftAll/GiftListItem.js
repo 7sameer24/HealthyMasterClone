@@ -1,51 +1,55 @@
-import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import getData from '../../../constants/API/API';
-import AnyIcon from '../../MainComponents/AnyIcon';
-import { genericStyles } from '../../../constants/genericStyles';
-import ItemList from './ItemList';
-import styles from './ItemsStyles';
-import { COLORS } from '../../../constants';
-import HeaderBar from '../../MainComponents/HeaderBar';
+import React, { useEffect, useState } from 'react';
+import getData from '../../constants/API/API';
+import ItemList from '../ItemScreen/Items/ItemList';
+import styles from '../ItemScreen/Items/ItemsStyles';
+import { genericStyles } from '../../constants/genericStyles';
+import AnyIcon from '../MainComponents/AnyIcon';
+import { COLORS } from '../../constants';
+import HeaderBar from '../MainComponents/HeaderBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_TO_CART, INCREMENT } from '../../../store/action/action';
-import Spinner from '../../MainComponents/Spinner';
-const Items = ({ route, navigation }) => {
-  const { ID, Count, Name } = route.params;
+import { INCREMENT } from '../../store/action/action';
+import Spinner from '../MainComponents/Spinner';
+
+const GiftListItem = ({ route, navigation }) => {
+  const { ID } = route.params;
   const [data, setData] = useState([]);
+  const [Count, setCount] = useState([]);
   const [Grid, setGrid] = useState(false);
 
-  const itemList = async () => {
-    const URL = `http://3.6.175.107//admins/api/items/item.json?&item_category_id=${ID}&customer_id=159&page=1`;
+  const FetchItem = async () => {
+    const URL = `http://3.6.175.107/admins/api/items/itemkeyword.json?&item_category_id=${ID}&customer_id=159&page=1`;
     const response = await getData(URL);
     const { status } = response;
     if (!status) {
       console.log(response);
       return void 0;
     } else {
-      setData(response.data.items);
+      setData(response.data.ItemRows.map(_ => _.item));
+      setCount(response.data.item_count);
     }
   };
   useEffect(() => {
-    itemList();
+    FetchItem();
     return () => {
       setData([]);
+      setCount([]);
     };
   }, []);
+
   const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
       <HeaderBar
-        headerName={Name}
         IconName="arrow-back-outline"
         IconSize={30}
         onPress={() => navigation.goBack()}
         HeartIcon="heart-outline"
         navigation={navigation}
         BadgeContainer={genericStyles.bottom(25)}
-        Container={genericStyles.height('11%')}
-        Heading={genericStyles.right(50)}
+        Container={genericStyles.height('10%')}
+        IconStyle={genericStyles.right('80%')}
       />
       {data.length > 0 ? (
         <>
@@ -100,4 +104,5 @@ const Items = ({ route, navigation }) => {
     </View>
   );
 };
-export default Items;
+
+export default GiftListItem;

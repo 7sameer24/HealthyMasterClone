@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1013634491378",
+    "project_id": "hmclone",
+    "storage_bucket": "hmclone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013634491378:android:7180885bfa7ee3730c416b",
+        "android_client_info": {
+          "package_name": "com.health"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013634491378-cgc7mqn3drdq611pr2hg2f1ojbjoejcm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE1QZjxzhkNyTqHcgr1YgHvyN3_umfAZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013634491378-cgc7mqn3drdq611pr2hg2f1ojbjoejcm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

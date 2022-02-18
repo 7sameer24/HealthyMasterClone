@@ -14,33 +14,20 @@ const AnyIcon = ({
   containerStyle,
 }) => {
   return (
-    <View>
-      <Icon
-        name={name}
-        type={type}
-        color={color}
-        reverse={reverse}
-        containerStyle={containerStyle}
-        onPress={onPress}
-        size={size}
-        iconStyle={iconStyle}
-        style={style}
-      />
-    </View>
+    <Icon
+      name={name}
+      type={type}
+      color={color}
+      reverse={reverse}
+      containerStyle={containerStyle}
+      onPress={onPress}
+      size={size}
+      iconStyle={iconStyle}
+      style={style}
+    />
   );
 };
 
 export default AnyIcon;
 
-const styles = StyleSheet.create({
-  IconContainer: {
-    position: 'absolute',
-    bottom: -10,
-    marginBottom: 20,
-    alignSelf: 'flex-end',
-    right: 25,
-  },
-  Icon: {
-    elevation: 10,
-  },
-});
+const styles = StyleSheet.create({});

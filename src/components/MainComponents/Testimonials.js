@@ -1,11 +1,20 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import {Card, Divider} from 'react-native-elements';
 import {COLORS} from '../../constants';
 import {genericStyles} from '../../constants/genericStyles';
 import AnyIcon from './AnyIcon';
 
 const Testimonials = ({Data}) => {
+  const {width, height} = useWindowDimensions();
+
   return (
     <View style={styles.container}>
       <Text style={styles.Heading}>Our Clients say</Text>
@@ -15,7 +24,7 @@ const Testimonials = ({Data}) => {
           <View key={data.id}>
             <Card
               containerStyle={[
-                styles.containerStyle,
+                styles.containerStyle(width, height),
                 {backgroundColor: data.color},
               ]}>
               <AnyIcon
@@ -57,15 +66,15 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontWeight: '500',
   },
-  containerStyle: {
+  containerStyle: (width, height) => ({
     borderRadius: 4,
     borderWidth: 0,
     padding: 0,
-    width: 265,
-    height: 320,
+    width: width / 1.5,
+    height: height / 2.5,
     marginBottom: 0,
     marginHorizontal: 8,
-  },
+  }),
   Divider: {
     marginHorizontal: 190,
   },

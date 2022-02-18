@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import {Card, Divider, Input, Button, colors} from 'react-native-elements';
+import {Card, Divider, Input, Button} from 'react-native-elements';
 import {COLORS} from '../../constants';
 import {genericStyles} from '../../constants/genericStyles';
 
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 0,
     padding: 0,
-    backgroundColor: colors.success,
+    backgroundColor: COLORS.success,
     margin: 0,
     marginHorizontal: 10,
     marginBottom: 5,

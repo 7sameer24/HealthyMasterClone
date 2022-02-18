@@ -8,20 +8,20 @@ import {
   View,
   useWindowDimensions,
 } from 'react-native';
-import {Card, colors, Divider} from 'react-native-elements';
-import {COLORS, images} from '../../constants';
-import {genericStyles} from '../../constants/genericStyles';
+import { Card, Divider } from 'react-native-elements';
+import { COLORS, images } from '../../constants';
+import { genericStyles } from '../../constants/genericStyles';
 
-const HealthyOffers = ({Data, navigation}) => {
-  const {width, height} = useWindowDimensions();
+const HealthyOffers = ({ Data, navigation }) => {
+  const { width, height } = useWindowDimensions();
   return (
     <View style={genericStyles.bottom(30)}>
       <ImageBackground
         source={images.Banner3}
         fadeDuration={0}
-        imageStyle={[genericStyles.height(120), {marginTop: 2}]}>
+        imageStyle={[genericStyles.height(120), { marginTop: 2 }]}>
         <Text style={styles.Heading}>Healthy Offerings</Text>
-        <Divider width={1} style={styles.Divider} color={colors.white} />
+        <Divider width={1} style={styles.Divider} color={COLORS.white} />
         <View style={styles.View}>
           {Data.map(data => (
             <TouchableOpacity
@@ -36,7 +36,7 @@ const HealthyOffers = ({Data, navigation}) => {
               }>
               <Card containerStyle={styles.containerStyle(width, height)}>
                 <Image
-                  source={{uri: data.image_fullpath}}
+                  source={{ uri: data.image_fullpath }}
                   style={styles.image}
                 />
                 <Text style={styles.Text}>{data.name}</Text>
@@ -60,12 +60,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 10,
     color: COLORS.white,
-    textAlign: 'center',
     fontWeight: '500',
-    backgroundColor: colors.success,
+    backgroundColor: COLORS.success,
     borderRadius: 7,
-    marginHorizontal: 120,
     paddingVertical: 5,
+    width: '35%',
+    alignSelf: 'center',
+    textAlign: 'center',
   },
   containerStyle: (width, height) => ({
     width: width / 3.2,
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: 35,
     marginHorizontal: 4,
     backgroundColor: COLORS.newColor,
-    borderColor: colors.success,
+    borderColor: COLORS.success,
   }),
   Divider: {
     marginHorizontal: 170,
@@ -105,11 +106,12 @@ const styles = StyleSheet.create({
   item_count: {
     fontWeight: '500',
     bottom: 23,
+    alignSelf: 'center',
     textAlign: 'center',
     fontSize: 9,
-    backgroundColor: colors.success,
-    color: colors.white,
-    marginHorizontal: 20,
-    borderRadius: 5,
+    backgroundColor: COLORS.success,
+    color: COLORS.white,
+    width: '70%',
+    borderRadius: 4,
   },
 });

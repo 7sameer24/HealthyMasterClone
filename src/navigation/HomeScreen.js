@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {colors} from 'react-native-elements';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import getData from '../constants/API/API';
 import apiUrl from '../constants/API/apiUrl';
 import Banner from '../components/MainComponents/Banner';
@@ -19,11 +12,12 @@ import Testimonials from '../components/MainComponents/Testimonials';
 import WhatsAppIcon from '../components/MainComponents/WhatsAppIcon';
 import {COLORS, images} from '../constants';
 import {genericStyles} from '../constants/genericStyles';
+import SearchTouchable from '../components/MainComponents/SearchTouchable';
+import Spinner from '../components/MainComponents/Spinner';
 
 const HomeScreen = ({navigation}) => {
   const [data, setData] = useState([]);
   const [TestData, setTestData] = useState([]);
-  const [cart, setCart] = useState([]);
   const [allImage, setImage] = useState([]);
   const fetchData = async () => {
     const URL = apiUrl.Home;
@@ -34,10 +28,9 @@ const HomeScreen = ({navigation}) => {
       return void 0;
     } else {
       setData(
-        response.data.dynamic[5].DynamicList_cat[0].child_item_categories,
+        response.data.dynamic[4].DynamicList_cat[0].child_item_categories,
       );
       setTestData(response.data.clients);
-      setCart(response.data.cart_count);
       setImage(response.data.dynamic[0].DynamicList);
     }
   };
@@ -52,7 +45,16 @@ const HomeScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       {(data && TestData && allImage).length > 0 ? (
         <>
-          <HeaderBar navigation={navigation} Data={cart} />
+          <HeaderBar
+            navigation={navigation}
+            headerName="Healthy Master"
+            onPress={() => navigation.openDrawer()}
+            IconSize={28}
+            IconName="menu-outline"
+            HeartIcon="heart-outline"
+            BellIcon="bell-outline"
+          />
+          <SearchTouchable navigation={navigation} />
           <ScrollView style={genericStyles.fill}>
             <View style={styles.colorView}></View>
             <SlideShow
@@ -71,11 +73,7 @@ const HomeScreen = ({navigation}) => {
           <WhatsAppIcon />
         </>
       ) : (
-        <ActivityIndicator
-          size="large"
-          color={colors.success}
-          style={styles.loader}
-        />
+        <Spinner barStyle="dark-content" />
       )}
     </SafeAreaView>
   );
@@ -89,12 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.lightGray2,
   },
   colorView: {
-    backgroundColor: colors.success,
+    backgroundColor: COLORS.success,
     height: 50,
-  },
-  loader: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
   },
 });
