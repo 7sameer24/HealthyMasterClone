@@ -43,38 +43,38 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* {(data && TestData && allImage).length > 0 ? ( */}
-      <>
-        <HeaderBar
-          navigation={navigation}
-          headerName="Healthy Master"
-          onPress={() => navigation.openDrawer()}
-          IconSize={28}
-          IconName="menu-outline"
-          HeartIcon="heart-outline"
-          BellIcon="bell-outline"
-        />
-        <SearchTouchable navigation={navigation} />
-        <ScrollView style={genericStyles.fill}>
-          <View style={styles.colorView}></View>
-          <SlideShow
-            Images={FetchImages}
-            sliderBoxHeight={150}
-            autoplay={true}
-            circleLoop={true}
+      {(data && TestData && allImage).length > 0 ? (
+        <>
+          <HeaderBar
+            navigation={navigation}
+            headerName="Healthy Master"
+            onPress={() => navigation.openDrawer()}
+            IconSize={28}
+            IconName="menu-outline"
+            HeartIcon="heart-outline"
+            BellIcon="bell-outline"
           />
-          <Categories />
-          <Banner source={images.Banner} />
-          <HealthyOffers navigation={navigation} Data={data} />
-          <Banner source={images.Banner2} style={genericStyles.bottom(20)} />
-          <Testimonials Data={TestData} />
-          <Subscribe />
-        </ScrollView>
-        <WhatsAppIcon />
-      </>
-      {/* ) : (
+          <SearchTouchable navigation={navigation} />
+          <ScrollView style={genericStyles.fill}>
+            <View style={styles.colorView}></View>
+            <SlideShow
+              Images={FetchImages}
+              sliderBoxHeight={150}
+              autoplay={true}
+              circleLoop={true}
+            />
+            <Categories />
+            <Banner source={images.Banner} />
+            <HealthyOffers navigation={navigation} Data={data} />
+            <Banner source={images.Banner2} style={genericStyles.bottom(20)} />
+            <Testimonials Data={TestData} />
+            <Subscribe />
+          </ScrollView>
+          <WhatsAppIcon />
+        </>
+      ) : (
         <Spinner barStyle="dark-content" />
-      )} */}
+      )}
     </SafeAreaView>
   );
 };
