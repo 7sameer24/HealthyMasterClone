@@ -35,11 +35,12 @@ const RegisterScreen = ({navigation}) => {
               name: username,
             });
           });
-        setTimeout(() => {
-          navigation.navigate('HomeScreen');
-          ToastAndroid.show('User added successfully', ToastAndroid.SHORT);
-        }, 500);
+        Keyboard.dismiss();
+        setIsLoading(false);
+        navigation.navigate('HomeScreen');
+        ToastAndroid.show('User added successfully', ToastAndroid.SHORT);
       } catch (error) {
+        setIsLoading(false);
         if (error.code === 'auth/email-already-in-use') {
           ToastAndroid.show(
             'That email address is already in use!',
@@ -59,8 +60,6 @@ const RegisterScreen = ({navigation}) => {
           );
         }
       }
-      Keyboard.dismiss();
-      setIsLoading(false);
     }
   };
 

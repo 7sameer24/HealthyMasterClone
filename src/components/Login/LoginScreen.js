@@ -26,15 +26,17 @@ const LoginScreen = ({navigation}) => {
       ToastAndroid.show('Please fill all fields', ToastAndroid.SHORT);
     } else {
       try {
-        await auth()
-          .signInWithEmailAndPassword(email, password, setIsLoading(true))
-          .then(() => {
-            setTimeout(() => {
-              navigation.navigate('HomeScreen');
-              ToastAndroid.show('User added successfully', ToastAndroid.SHORT);
-            }, 500);
-          });
+        await auth().signInWithEmailAndPassword(
+          email,
+          password,
+          setIsLoading(true),
+        );
+        Keyboard.dismiss();
+        setIsLoading(false);
+        navigation.navigate('HomeScreen');
+        ToastAndroid.show('Login successfully', ToastAndroid.SHORT);
       } catch (error) {
+        setIsLoading(false);
         if (error.code === 'auth/wrong-password') {
           ToastAndroid.show(
             'The password is invalid or the user does not have a password.',
@@ -54,8 +56,6 @@ const LoginScreen = ({navigation}) => {
           );
         }
       }
-      Keyboard.dismiss();
-      setIsLoading(false);
     }
   };
   return (
